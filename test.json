@@ -1,0 +1,4580 @@
+{
+"openapi": "3.0.0",
+"paths": {
+"/auth/login": {
+"post": {
+"operationId": "login",
+"summary": "로그인 API",
+"parameters": [],
+"requestBody": {
+"required": true,
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/LoginRequest"
+}
+}
+}
+},
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/LoginResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Auth"
+]
+}
+},
+"/auth/me": {
+"get": {
+"operationId": "getMe",
+"summary": "Me 정보 조회 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/MeResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Auth"
+]
+}
+},
+"/dashboard/{masterId}": {
+"get": {
+"operationId": "getDashboard",
+"summary": "대시보드 화면 조회용 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "masterId",
+"required": true,
+"in": "path",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/DashboardResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Dashboard"
+]
+}
+},
+"/content/{masterId}": {
+"get": {
+"operationId": "getContentList",
+"summary": "컨텐츠 조회 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "masterId",
+"required": true,
+"in": "path",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "type",
+"required": true,
+"in": "query",
+"schema": {
+"$ref": "#/components/schemas/CONTENT_TYPE"
+}
+},
+{
+"name": "order",
+"required": true,
+"in": "query",
+"schema": {
+"$ref": "#/components/schemas/CONTENT_ORDER"
+}
+},
+{
+"name": "offset",
+"required": false,
+"in": "query",
+"schema": {
+"type": "number"
+}
+},
+{
+"name": "limit",
+"required": false,
+"in": "query",
+"schema": {
+"type": "number"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ContentResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Content"
+]
+}
+},
+"/contents/{contentId}": {
+"get": {
+"operationId": "getContentById",
+"summary": "컨텐츠 조회 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "contentId",
+"required": true,
+"in": "path",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"default": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ContentByIdResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Content"
+]
+}
+},
+"/contents/picks": {
+"post": {
+"operationId": "createPickContent",
+"summary": "커뮤니티 컨텐츠 생성 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"required": true,
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PickContentCreateRequest"
+}
+}
+}
+},
+"responses": {
+"default": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ContentCreateResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Content"
+]
+}
+},
+"/contents/{contentId}/picks": {
+"patch": {
+"operationId": "updatePickContentById",
+"summary": "커뮤니티 컨텐츠 수정 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "contentId",
+"required": true,
+"in": "path",
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"required": true,
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PickContentUpdateRequest"
+}
+}
+}
+},
+"responses": {
+"default": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ContentCreateResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Content"
+]
+}
+},
+"/contents/secrets": {
+"post": {
+"operationId": "createSecretContent",
+"summary": "멤버십 컨텐츠 생성 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"required": true,
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/SecretContentCreateRequest"
+}
+}
+}
+},
+"responses": {
+"default": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ContentCreateResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Content"
+]
+}
+},
+"/contents/{contentId}/secrets": {
+"patch": {
+"operationId": "updateSecretContentById",
+"summary": "멤버십 컨텐츠 수정 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "contentId",
+"required": true,
+"in": "path",
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"required": true,
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/SecretContentUpdateRequest"
+}
+}
+}
+},
+"responses": {
+"default": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ContentCreateResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Content"
+]
+}
+},
+"/contents/{contentCmsId}/upload": {
+"patch": {
+"operationId": "updateContentUploadStateById",
+"summary": "업로드 상태값 수정 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "contentCmsId",
+"required": true,
+"in": "path",
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"required": true,
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/UploadStateUpdateRequest"
+}
+}
+}
+},
+"responses": {
+"default": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ContentUpdateResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Content"
+]
+}
+},
+"/contents/series": {
+"post": {
+"operationId": "createSeriesContent",
+"summary": "시리즈 컨텐츠 생성 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"required": true,
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/SeriesContentCreateRequest"
+}
+}
+}
+},
+"responses": {
+"default": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ContentCreateResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Content"
+]
+}
+},
+"/contents/{contentId}/series": {
+"patch": {
+"operationId": "updatePickContentById",
+"summary": "시리즈 컨텐츠 수정 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "contentId",
+"required": true,
+"in": "path",
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"required": true,
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/SeriesContentUpdateRequest"
+}
+}
+}
+},
+"responses": {
+"default": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ContentCreateResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Content"
+]
+},
+"get": {
+"operationId": "getSecretContentsBySeriesId",
+"summary": "시리즈에 속한 컨텐츠 조회 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "contentId",
+"required": true,
+"in": "path",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "order",
+"required": true,
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "offset",
+"required": true,
+"in": "query",
+"schema": {
+"type": "number"
+}
+},
+{
+"name": "limit",
+"required": true,
+"in": "query",
+"schema": {
+"type": "number"
+}
+},
+{
+"name": "contentState",
+"required": true,
+"in": "query",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"default": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/SecretContentsResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Content"
+]
+}
+},
+"/contents/publish-reserved-contents": {
+"post": {
+"operationId": "postReservedContents",
+"summary": "컨텐츠 예약발행 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"201": {
+"description": ""
+}
+},
+"tags": [
+"Content"
+]
+}
+},
+"/content-editor": {
+"post": {
+"operationId": "publishContent",
+"summary": "컨텐츠 발행 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"required": true,
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PublishContentRequest"
+}
+}
+}
+},
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PublishContentResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Content-editor"
+]
+}
+},
+"/content-editor/new/{masterId}": {
+"get": {
+"operationId": "getNewContentEditor",
+"summary": "새 컨텐츠 작성 조회용 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "masterId",
+"required": true,
+"in": "path",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ContentEditorResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Content-editor"
+]
+}
+},
+"/content-editor/mod/{contentId}": {
+"get": {
+"operationId": "getModContentEditor",
+"summary": "컨텐츠 수정 조회용 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "contentId",
+"required": true,
+"in": "path",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ContentEditorResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Content-editor"
+]
+}
+},
+"/content-editor/outbound-link": {
+"get": {
+"operationId": "getOutboundLink",
+"summary": "아웃바운드 링크 변환용 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "parse-url",
+"required": true,
+"in": "header",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/OutboundLinkResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Content-editor"
+]
+}
+},
+"/comments/user-comments/{masterId}": {
+"get": {
+"operationId": "getUserComments",
+"summary": "유저 댓글 탭 조회 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "masterId",
+"required": true,
+"in": "path",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "type",
+"required": true,
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "offset",
+"required": false,
+"in": "query",
+"schema": {
+"type": "number"
+}
+},
+{
+"name": "limit",
+"required": false,
+"in": "query",
+"schema": {
+"type": "number"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/UserCommentsResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Comments"
+]
+}
+},
+"/comments/user-comments/{masterId}/{contentId}": {
+"get": {
+"operationId": "getUserCommentsDetail",
+"summary": "유저 댓글 컨텐츠 별 상세 조회 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "masterId",
+"required": true,
+"in": "path",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "contentId",
+"required": true,
+"in": "path",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "type",
+"required": false,
+"in": "query",
+"schema": {
+"$ref": "#/components/schemas/COMMENT_TYPE"
+}
+},
+{
+"name": "offset",
+"required": false,
+"in": "query",
+"schema": {
+"type": "number"
+}
+},
+{
+"name": "limit",
+"required": false,
+"in": "query",
+"schema": {
+"type": "number"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/UserCommentsDetailResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Comments"
+]
+}
+},
+"/comments/user-comments/{masterId}/{contentId}/{commentId}": {
+"get": {
+"operationId": "getUserCommentsChildCommentsDetail",
+"summary": "유저 댓글 - 대댓글 상세 조회 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "masterId",
+"required": true,
+"in": "path",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "contentId",
+"required": true,
+"in": "path",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "commentId",
+"required": true,
+"in": "path",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "type",
+"required": false,
+"in": "query",
+"schema": {
+"$ref": "#/components/schemas/CHILD_COMMENT_TYPE"
+}
+},
+{
+"name": "offset",
+"required": false,
+"in": "query",
+"schema": {
+"type": "number"
+}
+},
+{
+"name": "limit",
+"required": false,
+"in": "query",
+"schema": {
+"type": "number"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/UserCommentsDetailResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Comments"
+]
+}
+},
+"/comments/my-comments/{masterId}": {
+"get": {
+"operationId": "getMyComments",
+"summary": "나의 댓글 탭 조회 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "masterId",
+"required": true,
+"in": "path",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "offset",
+"required": false,
+"in": "query",
+"schema": {
+"type": "number"
+}
+},
+{
+"name": "limit",
+"required": false,
+"in": "query",
+"schema": {
+"type": "number"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/MyCommentsResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Comments"
+]
+}
+},
+"/comments/my-comments/{masterId}/{commentId}": {
+"get": {
+"operationId": "getMyCommentsDetail",
+"summary": "나의 댓글 상세 조회 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "masterId",
+"required": true,
+"in": "path",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "commentId",
+"required": true,
+"in": "path",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "type",
+"required": false,
+"in": "query",
+"schema": {
+"$ref": "#/components/schemas/CHILD_COMMENT_TYPE"
+}
+},
+{
+"name": "offset",
+"required": false,
+"in": "query",
+"schema": {
+"type": "number"
+}
+},
+{
+"name": "limit",
+"required": false,
+"in": "query",
+"schema": {
+"type": "number"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/MyCommentsDetailResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Comments"
+]
+}
+},
+"/comments/read-by-master": {
+"post": {
+"operationId": "readByMaster",
+"summary": "마스터 리액션 - 댓글 읽음 처리 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"required": true,
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ReadByMasterRequest"
+}
+}
+}
+},
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/MasterReactionResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Comments"
+]
+}
+},
+"/comments/like-by-master": {
+"post": {
+"operationId": "likeByMaster",
+"summary": "마스터 리액션 - like 처리 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"required": true,
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/LikeByMasterRequest"
+}
+}
+}
+},
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/MasterReactionResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Comments"
+]
+}
+},
+"/comments/comment-by-master": {
+"post": {
+"operationId": "commentByMaster",
+"summary": "마스터 리액션 - 대댓글 작성 처리 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"required": true,
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/CommentByMasterRequest"
+}
+}
+}
+},
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/MasterReactionResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Comments"
+]
+}
+},
+"/masters/{masterId}/contents": {
+"get": {
+"operationId": "getContentsByMasterId",
+"summary": "컨텐츠 리스트 조회 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "masterId",
+"required": true,
+"in": "path",
+"description": "마스터 ObjectId",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "contentType",
+"required": true,
+"in": "query",
+"schema": {
+"$ref": "#/components/schemas/CMS_TYPE"
+}
+},
+{
+"name": "order",
+"required": true,
+"in": "query",
+"description": "popular: 조회수, recent: 공개일, oldest: 생성일, latest: 생성일",
+"schema": {
+"$ref": "#/components/schemas/CONTENT_ORDER"
+}
+},
+{
+"name": "contentState",
+"required": false,
+"in": "query",
+"description": "빈 값으로 올 시 모든 상태 조회",
+"schema": {
+"$ref": "#/components/schemas/CMS_STATE"
+}
+},
+{
+"name": "offset",
+"required": true,
+"in": "query",
+"schema": {
+"type": "number"
+}
+},
+{
+"name": "limit",
+"required": true,
+"in": "query",
+"schema": {
+"type": "number"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ContentsResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Master"
+]
+}
+},
+"/masters/{masterId}/master-notices": {
+"get": {
+"operationId": "getMasterNoticesByMasterId",
+"summary": "마스터 공지사항 리스트 조회 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "masterId",
+"required": true,
+"in": "path",
+"description": "마스터 ObjectId",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "order",
+"required": true,
+"in": "query",
+"schema": {
+"$ref": "#/components/schemas/MASTER_NOTICE_ORDER"
+}
+},
+{
+"name": "masterNoticeState",
+"required": false,
+"in": "query",
+"description": "빈 값으로 올 시 모든 상태 조회",
+"schema": {
+"$ref": "#/components/schemas/MASTER_NOTICE_STATE"
+}
+},
+{
+"name": "offset",
+"required": true,
+"in": "query",
+"schema": {
+"type": "number"
+}
+},
+{
+"name": "limit",
+"required": true,
+"in": "query",
+"schema": {
+"type": "number"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/MasterNoticesResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Master"
+]
+}
+},
+"/masters": {
+"get": {
+"operationId": "getMasters",
+"summary": "마스터 리스트 조회 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "order",
+"required": true,
+"in": "query",
+"schema": {
+"$ref": "#/components/schemas/MASTER_ORDER"
+}
+},
+{
+"name": "offset",
+"required": true,
+"in": "query",
+"schema": {
+"type": "number"
+}
+},
+{
+"name": "limit",
+"required": true,
+"in": "query",
+"schema": {
+"type": "number"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/MastersResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Master"
+]
+}
+},
+"/masters/{masterId}": {
+"get": {
+"operationId": "getMasterById",
+"summary": "마스터 조회 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "masterId",
+"required": true,
+"in": "path",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/MasterResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Master"
+]
+},
+"patch": {
+"operationId": "updateMasterById",
+"summary": "마스터 수정 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "masterId",
+"required": true,
+"in": "path",
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"required": true,
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/MasterUpdateRequest"
+}
+}
+}
+},
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/MasterUpdateResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Master"
+]
+}
+},
+"/masters/cms/{masterId}": {
+"get": {
+"operationId": "getMasterByCmsId",
+"summary": "마스터 조회 API",
+"description": "cmsId로 마스터 조회, 파트너센터 권한 생성되면 삭제할 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "masterId",
+"required": true,
+"in": "path",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/MasterResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Master"
+]
+}
+},
+"/masters/{masterId}/pushes": {
+"get": {
+"operationId": "getPushesByMasterId",
+"summary": "마스터의 알람 리스트 조회 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "masterId",
+"required": true,
+"in": "path",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "offset",
+"required": true,
+"in": "query",
+"schema": {
+"type": "number"
+}
+},
+{
+"name": "limit",
+"required": true,
+"in": "query",
+"schema": {
+"type": "number"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/MasterPushesResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Master"
+]
+}
+},
+"/master-notices/{masterNoticeId}": {
+"get": {
+"operationId": "getMasterNoticeById",
+"summary": "마스터 공지사항 조회 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "masterNoticeId",
+"required": true,
+"in": "path",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"default": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/MasterNoticeResponse"
+}
+}
+}
+}
+},
+"tags": [
+"MasterNotice"
+]
+},
+"patch": {
+"operationId": "updateMasterNoticeById",
+"summary": "마스터 공지사항 수정 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "masterNoticeId",
+"required": true,
+"in": "path",
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"required": true,
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/MasterNoticeUpdateRequest"
+}
+}
+}
+},
+"responses": {
+"default": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/MasterNoticeUpdateResponse"
+}
+}
+}
+}
+},
+"tags": [
+"MasterNotice"
+]
+}
+},
+"/master-notices": {
+"post": {
+"operationId": "createMasterNotice",
+"summary": "마스터 공지사항 생성 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"required": true,
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/MasterNoticeCreateRequest"
+}
+}
+}
+},
+"responses": {
+"default": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/MasterNoticeCreateResponse"
+}
+}
+}
+}
+},
+"tags": [
+"MasterNotice"
+]
+}
+},
+"/master-notices/publish-reserved-master-notices": {
+"post": {
+"operationId": "postReservedMasterNotices",
+"summary": "마스터 공지사항 예약발행 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"201": {
+"description": ""
+}
+},
+"tags": [
+"MasterNotice"
+]
+}
+},
+"/pushes/{pushId}": {
+"get": {
+"operationId": "getPushById",
+"summary": "푸쉬 조회 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "pushId",
+"required": true,
+"in": "path",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"default": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PushResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Push"
+]
+},
+"delete": {
+"operationId": "deletePushByPushId",
+"summary": "푸쉬 삭제 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "pushId",
+"required": true,
+"in": "path",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"204": {
+"description": ""
+}
+},
+"tags": [
+"Push"
+]
+}
+},
+"/pushes": {
+"post": {
+"operationId": "createPushAndCustomAlarm",
+"summary": "푸쉬 및 커스텀 알람 생성 API",
+"parameters": [
+{
+"name": "Authorization",
+"required": false,
+"in": "header",
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"required": true,
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PushCreateRequest"
+}
+}
+}
+},
+"responses": {
+"default": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PushResponse"
+}
+}
+}
+}
+},
+"tags": [
+"Push"
+]
+}
+},
+"/membership-waitlists": {
+"get": {
+"operationId": "getMembershipWaitlist",
+"summary": "곧 멤버십이 오픈되어요.",
+"parameters": [
+{
+"name": "isShown",
+"required": false,
+"in": "query",
+"schema": {
+"type": "boolean"
+}
+},
+{
+"name": "offset",
+"required": false,
+"in": "query",
+"schema": {
+"type": "number"
+}
+},
+{
+"name": "limit",
+"required": false,
+"in": "query",
+"schema": {
+"type": "number"
+}
+},
+{
+"name": "authorization",
+"in": "header",
+"required": false,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "성공",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/MembershipWaitlistsResponse"
+}
+}
+}
+}
+},
+"tags": [
+"MembershipWaitlist"
+],
+"security": [
+{
+"bearerAuth": []
+}
+]
+}
+}
+},
+"info": {
+"title": "us-partner APIs",
+"description": "API description",
+"version": "1.0",
+"contact": {}
+},
+"tags": [],
+"servers": [],
+"components": {
+"schemas": {
+"LoginRequest": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string",
+"example": "mym0846@us-all.co.kr",
+"description": "회원 ID"
+},
+"pw": {
+"type": "string",
+"example": "1q2w3e4r!",
+"description": "회원 PW"
+}
+},
+"required": [
+"id",
+"pw"
+]
+},
+"User": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string"
+},
+"name": {
+"type": "string"
+}
+},
+"required": [
+"id",
+"name"
+]
+},
+"Master": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string"
+},
+"cmsId": {
+"type": "string"
+},
+"name": {
+"type": "string"
+},
+"profileImageUrl": {
+"type": "string"
+},
+"createdAt": {
+"type": "string"
+},
+"updatedAt": {
+"type": "string"
+},
+"userId": {
+"type": "string"
+}
+},
+"required": [
+"id",
+"cmsId",
+"name",
+"profileImageUrl",
+"createdAt",
+"updatedAt"
+]
+},
+"LoginResponse": {
+"type": "object",
+"properties": {
+"jwt": {
+"type": "string"
+},
+"user": {
+"$ref": "#/components/schemas/User"
+},
+"master": {
+"$ref": "#/components/schemas/Master"
+}
+},
+"required": [
+"jwt",
+"user",
+"master"
+]
+},
+"MeResponse": {
+"type": "object",
+"properties": {
+"user": {
+"$ref": "#/components/schemas/User"
+},
+"master": {
+"$ref": "#/components/schemas/Master"
+}
+},
+"required": [
+"user",
+"master"
+]
+},
+"Summary": {
+"type": "object",
+"properties": {
+"aggregationTime": {
+"type": "string"
+},
+"totalFollowCount": {
+"type": "integer"
+},
+"totalFollowDiff": {
+"type": "integer"
+},
+"totalMembershipCount": {
+"type": "integer"
+},
+"totalMembershipDiff": {
+"type": "integer"
+},
+"unreadCommentCount": {
+"type": "integer"
+}
+},
+"required": [
+"aggregationTime",
+"totalFollowCount",
+"totalFollowDiff",
+"totalMembershipCount",
+"totalMembershipDiff",
+"unreadCommentCount"
+]
+},
+"CONTENT_TYPE": {
+"type": "string",
+"enum": [
+"all",
+"pick",
+"secret"
+]
+},
+"CONTENT_STATE": {
+"type": "string",
+"enum": [
+"published",
+"draft",
+"reserved",
+"private"
+]
+},
+"Content": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string"
+},
+"type": {
+"$ref": "#/components/schemas/CONTENT_TYPE"
+},
+"title": {
+"type": "string"
+},
+"seriesTitle": {
+"type": "string",
+"nullable": true
+},
+"state": {
+"$ref": "#/components/schemas/CONTENT_STATE"
+},
+"commentCount": {
+"type": "integer"
+},
+"viewCount": {
+"type": "integer"
+},
+"pickCount": {
+"type": "integer"
+},
+"createdAt": {
+"type": "string"
+},
+"updatedAt": {
+"type": "string"
+},
+"publishedAt": {
+"type": "string"
+},
+"reservedAt": {
+"type": "string"
+}
+},
+"required": [
+"id",
+"type",
+"title",
+"state",
+"commentCount",
+"viewCount",
+"pickCount",
+"createdAt",
+"updatedAt"
+]
+},
+"Reaction": {
+"type": "object",
+"properties": {
+"likeCount": {
+"type": "integer"
+},
+"childCommentCount": {
+"type": "integer"
+}
+},
+"required": [
+"likeCount",
+"childCommentCount"
+]
+},
+"MasterReaction": {
+"type": "object",
+"properties": {
+"isRead": {
+"type": "boolean"
+},
+"isLiked": {
+"type": "boolean"
+},
+"isCommented": {
+"type": "boolean"
+}
+},
+"required": [
+"isRead",
+"isLiked",
+"isCommented"
+]
+},
+"USER_US_GAUGE": {
+"type": "string",
+"enum": [
+"beginner",
+"explorer",
+"investor",
+"analyst",
+"finple"
+]
+},
+"ParentComment": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string"
+},
+"text": {
+"type": "string"
+},
+"userName": {
+"type": "string"
+},
+"userPortraitImageUrl": {
+"type": "string"
+},
+"userUsGauge": {
+"$ref": "#/components/schemas/USER_US_GAUGE"
+},
+"contentId": {
+"type": "string"
+},
+"contentTitle": {
+"type": "string"
+},
+"contentPublishedAt": {
+"type": "string"
+},
+"parentComment": {
+"nullable": true,
+"allOf": [
+{
+"$ref": "#/components/schemas/ParentComment"
+}
+]
+},
+"reaction": {
+"$ref": "#/components/schemas/Reaction"
+},
+"masterReaction": {
+"$ref": "#/components/schemas/MasterReaction"
+},
+"isMasterSelfCommented": {
+"type": "boolean"
+},
+"createdAt": {
+"type": "string"
+}
+},
+"required": [
+"id",
+"text",
+"userName",
+"userPortraitImageUrl",
+"userUsGauge",
+"contentId",
+"contentTitle",
+"contentPublishedAt",
+"reaction",
+"masterReaction",
+"isMasterSelfCommented",
+"createdAt"
+]
+},
+"Comment": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string"
+},
+"text": {
+"type": "string"
+},
+"userName": {
+"type": "string"
+},
+"userPortraitImageUrl": {
+"type": "string"
+},
+"userUsGauge": {
+"$ref": "#/components/schemas/USER_US_GAUGE"
+},
+"contentId": {
+"type": "string"
+},
+"contentTitle": {
+"type": "string"
+},
+"contentPublishedAt": {
+"type": "string"
+},
+"parentComment": {
+"nullable": true,
+"allOf": [
+{
+"$ref": "#/components/schemas/ParentComment"
+}
+]
+},
+"reaction": {
+"$ref": "#/components/schemas/Reaction"
+},
+"masterReaction": {
+"$ref": "#/components/schemas/MasterReaction"
+},
+"isMasterSelfCommented": {
+"type": "boolean"
+},
+"createdAt": {
+"type": "string"
+}
+},
+"required": [
+"id",
+"text",
+"userName",
+"userPortraitImageUrl",
+"userUsGauge",
+"contentId",
+"contentTitle",
+"contentPublishedAt",
+"reaction",
+"masterReaction",
+"isMasterSelfCommented",
+"createdAt"
+]
+},
+"DashboardResponse": {
+"type": "object",
+"properties": {
+"summary": {
+"$ref": "#/components/schemas/Summary"
+},
+"recentContentList": {
+"type": "array",
+"description": "컨텐츠 리스트",
+"items": {
+"$ref": "#/components/schemas/Content"
+}
+},
+"unreadComments": {
+"type": "array",
+"description": "안읽은 댓글 리스트",
+"items": {
+"$ref": "#/components/schemas/Comment"
+}
+}
+},
+"required": [
+"summary",
+"recentContentList",
+"unreadComments"
+]
+},
+"Pagination": {
+"type": "object",
+"properties": {
+"offset": {
+"type": "integer"
+},
+"limit": {
+"type": "integer"
+},
+"total": {
+"type": "integer"
+}
+},
+"required": [
+"offset",
+"limit",
+"total"
+]
+},
+"ContentResponse": {
+"type": "object",
+"properties": {
+"contentList": {
+"type": "array",
+"description": "컨텐츠 리스트",
+"items": {
+"$ref": "#/components/schemas/Content"
+}
+},
+"pagination": {
+"$ref": "#/components/schemas/Pagination"
+}
+},
+"required": [
+"contentList",
+"pagination"
+]
+},
+"CONTENT_ORDER": {
+"type": "string",
+"enum": [
+"RECENT",
+"POPULAR",
+"OLDEST",
+"LATEST"
+]
+},
+"ContentByIdResponse": {
+"type": "object",
+"properties": {
+"content": {
+"oneOf": [
+{
+"$ref": "#/components/schemas/PickContentData"
+},
+{
+"$ref": "#/components/schemas/SecretContentData"
+},
+{
+"$ref": "#/components/schemas/SeriesContentData"
+}
+]
+}
+},
+"required": [
+"content"
+]
+},
+"OutBoundLink": {
+"type": "object",
+"properties": {
+"title": {
+"type": "string"
+},
+"sourceName": {
+"type": "string"
+},
+"imageUrl": {
+"type": "string",
+"format": "url"
+},
+"originUrl": {
+"type": "string",
+"format": "url"
+}
+},
+"required": [
+"title",
+"sourceName",
+"imageUrl",
+"originUrl"
+]
+},
+"PDF": {
+"type": "object",
+"properties": {
+"pdfUrl": {
+"type": "string",
+"format": "url"
+},
+"fileName": {
+"type": "string"
+}
+},
+"required": [
+"pdfUrl",
+"fileName"
+]
+},
+"ALARM_TARGET": {
+"type": "string",
+"enum": [
+"all",
+"follower",
+"membership",
+"unViewed"
+]
+},
+"AlarmSetting": {
+"type": "object",
+"properties": {
+"isAlarm": {
+"type": "boolean"
+},
+"alarmTarget": {
+"nullable": true,
+"$ref": "#/components/schemas/ALARM_TARGET"
+},
+"useExistingContentTitle": {
+"type": "boolean",
+"nullable": true
+},
+"title": {
+"type": "string",
+"nullable": true
+}
+},
+"required": [
+"isAlarm"
+]
+},
+"ContentIdentifier": {
+"type": "object",
+"properties": {
+"contentId": {
+"type": "string",
+"description": "컨텐츠 MongoDB ID"
+},
+"contentCmsId": {
+"type": "string",
+"description": "컨텐츠 Auto Increment ID"
+}
+},
+"required": [
+"contentId",
+"contentCmsId"
+]
+},
+"CMS_TYPE": {
+"type": "string",
+"enum": [
+"pick",
+"secret",
+"series"
+]
+},
+"CMS_STATE": {
+"type": "string",
+"enum": [
+"draft",
+"reserved",
+"published",
+"deleted"
+]
+},
+"CONTENT_CATEGORY": {
+"type": "string",
+"enum": [
+"secondaryBattery",
+"realty",
+"investment",
+"domesticStock",
+"foreignStock",
+"cryptoCurrency",
+"companyAnalysis",
+"macroEconomics",
+"personalFinance",
+"safeAsset",
+"economicTheory",
+"none"
+]
+},
+"PICK_THUMBNAIL_TYPE": {
+"type": "string",
+"enum": [
+"none",
+"link",
+"image"
+]
+},
+"PickContentData": {
+"type": "object",
+"properties": {
+"contentId": {
+"type": "string",
+"description": "컨텐츠 MongoDB ID"
+},
+"contentCmsId": {
+"type": "string",
+"description": "컨텐츠 Auto Increment ID"
+},
+"masterId": {
+"type": "string",
+"description": "컨텐츠 MongoDB ID"
+},
+"masterCmsId": {
+"type": "string",
+"description": "컨텐츠 Auto Increment ID"
+},
+"contentType": {
+"$ref": "#/components/schemas/CMS_TYPE"
+},
+"contentState": {
+"$ref": "#/components/schemas/CMS_STATE"
+},
+"title": {
+"type": "string"
+},
+"description": {
+"type": "string"
+},
+"body": {
+"type": "string"
+},
+"html": {
+"type": "string"
+},
+"category": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/CONTENT_CATEGORY"
+}
+},
+"pickThumbnailType": {
+"$ref": "#/components/schemas/PICK_THUMBNAIL_TYPE"
+},
+"imageUrl": {
+"type": "string",
+"nullable": true
+},
+"outBoundLinks": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/OutBoundLink"
+},
+"nullable": true
+},
+"alarmSetting": {
+"$ref": "#/components/schemas/AlarmSetting"
+},
+"isDisplayJoinRecommendation": {
+"type": "boolean"
+},
+"PDFs": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/PDF"
+},
+"nullable": true
+},
+"createdAt": {
+"type": "string"
+},
+"reservedAt": {
+"type": "string",
+"nullable": true
+},
+"publishedAt": {
+"type": "string",
+"nullable": true
+}
+},
+"required": [
+"contentId",
+"contentCmsId",
+"masterId",
+"masterCmsId",
+"contentType",
+"contentState",
+"title",
+"description",
+"body",
+"html",
+"category",
+"pickThumbnailType",
+"alarmSetting",
+"isDisplayJoinRecommendation",
+"createdAt"
+]
+},
+"SECRET_TYPE": {
+"type": "string",
+"enum": [
+"article",
+"video",
+"audio"
+]
+},
+"UPLOAD_STATE": {
+"type": "string",
+"enum": [
+"failed",
+"uploading",
+"complete"
+]
+},
+"SecretContentData": {
+"type": "object",
+"properties": {
+"contentId": {
+"type": "string",
+"description": "컨텐츠 MongoDB ID"
+},
+"contentCmsId": {
+"type": "string",
+"description": "컨텐츠 Auto Increment ID"
+},
+"masterId": {
+"type": "string",
+"description": "컨텐츠 MongoDB ID"
+},
+"masterCmsId": {
+"type": "string",
+"description": "컨텐츠 Auto Increment ID"
+},
+"seriesId": {
+"type": "string",
+"description": "시리즈 MongoDB ID"
+},
+"seriesCmsId": {
+"type": "string",
+"description": "시리즈 Auto Increment ID"
+},
+"seriesTitle": {
+"type": "string"
+},
+"contentType": {
+"$ref": "#/components/schemas/CMS_TYPE"
+},
+"contentState": {
+"$ref": "#/components/schemas/CMS_STATE"
+},
+"secretType": {
+"$ref": "#/components/schemas/SECRET_TYPE"
+},
+"title": {
+"type": "string"
+},
+"description": {
+"type": "string"
+},
+"body": {
+"type": "string"
+},
+"price": {
+"type": "integer"
+},
+"round": {
+"type": "integer",
+"minimum": 1
+},
+"html": {
+"type": "string"
+},
+"summary": {
+"type": "string",
+"nullable": true
+},
+"uploadState": {
+"$ref": "#/components/schemas/UPLOAD_STATE"
+},
+"uploadPercentage": {
+"type": "integer",
+"nullable": true
+},
+"previewUrl": {
+"type": "string",
+"nullable": true
+},
+"thumbnailUrl": {
+"type": "string",
+"nullable": true
+},
+"originUrl": {
+"type": "string",
+"nullable": true
+},
+"convertUrl": {
+"type": "string",
+"nullable": true
+},
+"alarmSetting": {
+"$ref": "#/components/schemas/AlarmSetting"
+},
+"isMemberOnly": {
+"type": "boolean"
+},
+"PDFs": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/PDF"
+},
+"nullable": true
+},
+"createdAt": {
+"type": "string"
+},
+"reservedAt": {
+"type": "string",
+"nullable": true
+},
+"publishedAt": {
+"type": "string",
+"nullable": true
+}
+},
+"required": [
+"contentId",
+"contentCmsId",
+"masterId",
+"masterCmsId",
+"seriesId",
+"seriesCmsId",
+"seriesTitle",
+"contentType",
+"contentState",
+"secretType",
+"title",
+"description",
+"body",
+"price",
+"round",
+"html",
+"uploadState",
+"alarmSetting",
+"isMemberOnly",
+"createdAt"
+]
+},
+"SeriesContentData": {
+"type": "object",
+"properties": {
+"contentId": {
+"type": "string",
+"description": "컨텐츠 MongoDB ID"
+},
+"contentCmsId": {
+"type": "string",
+"description": "컨텐츠 Auto Increment ID"
+},
+"masterId": {
+"type": "string",
+"description": "컨텐츠 MongoDB ID"
+},
+"masterCmsId": {
+"type": "string",
+"description": "컨텐츠 Auto Increment ID"
+},
+"contentType": {
+"$ref": "#/components/schemas/CMS_TYPE"
+},
+"contentState": {
+"$ref": "#/components/schemas/CMS_STATE"
+},
+"title": {
+"type": "string"
+},
+"description": {
+"type": "string"
+},
+"category": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/CONTENT_CATEGORY"
+}
+},
+"imageUrl": {
+"type": "string"
+},
+"createdAt": {
+"type": "string"
+},
+"publishedAt": {
+"type": "string",
+"nullable": true
+}
+},
+"required": [
+"contentId",
+"contentCmsId",
+"masterId",
+"masterCmsId",
+"contentType",
+"contentState",
+"title",
+"description",
+"category",
+"imageUrl",
+"createdAt"
+]
+},
+"SecretContentMetadata": {
+"type": "object",
+"properties": {
+"contentId": {
+"type": "string",
+"description": "컨텐츠 MongoDB ID"
+},
+"contentCmsId": {
+"type": "string",
+"description": "컨텐츠 Auto Increment ID"
+},
+"contentState": {
+"$ref": "#/components/schemas/CMS_STATE"
+},
+"title": {
+"type": "string"
+},
+"pickCount": {
+"type": "integer"
+},
+"commentCount": {
+"type": "integer"
+},
+"viewCount": {
+"type": "integer"
+},
+"round": {
+"type": "integer",
+"minimum": 1
+},
+"price": {
+"type": "integer"
+},
+"uploadState": {
+"nullable": true,
+"$ref": "#/components/schemas/UPLOAD_STATE"
+},
+"uploadPercentage": {
+"type": "integer",
+"nullable": true
+},
+"createdAt": {
+"type": "string"
+},
+"reservedAt": {
+"type": "string",
+"nullable": true
+},
+"publishedAt": {
+"type": "string",
+"nullable": true
+}
+},
+"required": [
+"contentId",
+"contentCmsId",
+"contentState",
+"title",
+"pickCount",
+"commentCount",
+"viewCount",
+"round",
+"price",
+"createdAt"
+]
+},
+"PickContentCreateRequest": {
+"type": "object",
+"properties": {
+"masterId": {
+"type": "string",
+"description": "ObjectID"
+},
+"contentCmsState": {
+"$ref": "#/components/schemas/CMS_STATE"
+},
+"contentReservedAt": {
+"type": "string",
+"format": "date-time",
+"nullable": true
+},
+"title": {
+"type": "string"
+},
+"description": {
+"type": "string"
+},
+"alarmSetting": {
+"nullable": true,
+"allOf": [
+{
+"$ref": "#/components/schemas/AlarmSetting"
+}
+]
+},
+"category": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/CONTENT_CATEGORY"
+}
+},
+"body": {
+"type": "string"
+},
+"html": {
+"type": "string"
+},
+"pickThumbnailType": {
+"$ref": "#/components/schemas/PICK_THUMBNAIL_TYPE"
+},
+"outBoundLinks": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/OutBoundLink"
+},
+"nullable": true
+},
+"pdf": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/PDF"
+},
+"nullable": true
+},
+"imageUrl": {
+"type": "string"
+}
+},
+"required": [
+"masterId",
+"contentCmsState",
+"title",
+"description",
+"category",
+"body",
+"html",
+"pickThumbnailType"
+]
+},
+"ContentCreateResponse": {
+"type": "object",
+"properties": {
+"content": {
+"$ref": "#/components/schemas/ContentIdentifier"
+}
+},
+"required": [
+"content"
+]
+},
+"PickContentUpdateRequest": {
+"type": "object",
+"properties": {
+"contentCmsState": {
+"$ref": "#/components/schemas/CMS_STATE"
+},
+"contentReservedAt": {
+"type": "string",
+"format": "date-time",
+"nullable": true
+},
+"title": {
+"type": "string"
+},
+"description": {
+"type": "string"
+},
+"alarmSetting": {
+"nullable": true,
+"allOf": [
+{
+"$ref": "#/components/schemas/AlarmSetting"
+}
+]
+},
+"category": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/CONTENT_CATEGORY"
+}
+},
+"body": {
+"type": "string"
+},
+"html": {
+"type": "string"
+},
+"pickThumbnailType": {
+"$ref": "#/components/schemas/PICK_THUMBNAIL_TYPE"
+},
+"outBoundLinks": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/OutBoundLink"
+},
+"nullable": true
+},
+"pdf": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/PDF"
+},
+"nullable": true
+},
+"imageUrl": {
+"type": "string",
+"nullable": true
+}
+},
+"required": [
+"contentCmsState",
+"title",
+"description",
+"category",
+"body",
+"html",
+"pickThumbnailType"
+]
+},
+"SecretContentCreateRequest": {
+"type": "object",
+"properties": {
+"masterId": {
+"type": "string"
+},
+"seriesId": {
+"type": "string"
+},
+"contentCmsState": {
+"$ref": "#/components/schemas/CMS_STATE"
+},
+"contentReservedAt": {
+"type": "string",
+"format": "date-time",
+"nullable": true
+},
+"title": {
+"type": "string"
+},
+"description": {
+"type": "string"
+},
+"body": {
+"type": "string"
+},
+"html": {
+"type": "string"
+},
+"price": {
+"type": "integer"
+},
+"round": {
+"type": "integer",
+"minimum": 1
+},
+"thumbnailUrl": {
+"type": "string",
+"nullable": true
+},
+"summary": {
+"type": "string",
+"nullable": true
+},
+"isMemberOnly": {
+"type": "boolean"
+},
+"secretType": {
+"$ref": "#/components/schemas/SECRET_TYPE"
+},
+"originUrl": {
+"type": "string",
+"nullable": true
+},
+"uploadState": {
+"nullable": true,
+"$ref": "#/components/schemas/UPLOAD_STATE"
+},
+"pdf": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/PDF"
+},
+"nullable": true
+},
+"alarmSetting": {
+"nullable": true,
+"allOf": [
+{
+"$ref": "#/components/schemas/AlarmSetting"
+}
+]
+}
+},
+"required": [
+"masterId",
+"seriesId",
+"contentCmsState",
+"title",
+"description",
+"body",
+"html",
+"price",
+"round",
+"isMemberOnly",
+"secretType"
+]
+},
+"SecretContentUpdateRequest": {
+"type": "object",
+"properties": {
+"seriesId": {
+"type": "string"
+},
+"contentCmsState": {
+"$ref": "#/components/schemas/CMS_STATE"
+},
+"contentReservedAt": {
+"type": "string",
+"format": "date-time",
+"nullable": true
+},
+"title": {
+"type": "string"
+},
+"description": {
+"type": "string",
+"nullable": true
+},
+"body": {
+"type": "string"
+},
+"html": {
+"type": "string"
+},
+"price": {
+"type": "integer",
+"minimum": -1
+},
+"round": {
+"type": "integer",
+"minimum": 1
+},
+"thumbnailUrl": {
+"type": "string",
+"nullable": true
+},
+"summary": {
+"type": "string",
+"nullable": true
+},
+"isMemberOnly": {
+"type": "boolean"
+},
+"secretType": {
+"$ref": "#/components/schemas/SECRET_TYPE"
+},
+"originUrl": {
+"type": "string",
+"nullable": true
+},
+"uploadState": {
+"nullable": true,
+"$ref": "#/components/schemas/UPLOAD_STATE"
+},
+"uploadPercentage": {
+"type": "integer",
+"nullable": true
+},
+"pdf": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/PDF"
+},
+"nullable": true
+},
+"alarmSetting": {
+"nullable": true,
+"allOf": [
+{
+"$ref": "#/components/schemas/AlarmSetting"
+}
+]
+}
+},
+"required": [
+"seriesId",
+"contentCmsState",
+"title",
+"body",
+"html",
+"price",
+"round",
+"isMemberOnly",
+"secretType"
+]
+},
+"UploadStateUpdateRequest": {
+"type": "object",
+"properties": {
+"uploadState": {
+"$ref": "#/components/schemas/UPLOAD_STATE"
+},
+"uploadPercentage": {
+"type": "integer"
+},
+"convertUrl": {
+"type": "string",
+"nullable": true
+}
+},
+"required": [
+"uploadState",
+"uploadPercentage"
+]
+},
+"ContentUpdateResponse": {
+"type": "object",
+"properties": {
+"content": {
+"$ref": "#/components/schemas/ContentIdentifier"
+}
+},
+"required": [
+"content"
+]
+},
+"SeriesContentCreateRequest": {
+"type": "object",
+"properties": {
+"masterId": {
+"type": "string",
+"description": "ObjectID"
+},
+"contentCmsState": {
+"$ref": "#/components/schemas/CMS_STATE"
+},
+"title": {
+"type": "string"
+},
+"description": {
+"type": "string",
+"nullable": true
+},
+"category": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/CONTENT_CATEGORY"
+}
+},
+"imageUrl": {
+"type": "string"
+}
+},
+"required": [
+"masterId",
+"contentCmsState",
+"title",
+"category",
+"imageUrl"
+]
+},
+"SeriesContentUpdateRequest": {
+"type": "object",
+"properties": {
+"contentCmsState": {
+"$ref": "#/components/schemas/CMS_STATE"
+},
+"title": {
+"type": "string"
+},
+"description": {
+"type": "string",
+"nullable": true
+},
+"category": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/CONTENT_CATEGORY"
+}
+},
+"imageUrl": {
+"type": "string"
+}
+},
+"required": [
+"contentCmsState",
+"title",
+"category",
+"imageUrl"
+]
+},
+"SecretContentsResponse": {
+"type": "object",
+"properties": {
+"contents": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/SecretContentMetadata"
+}
+},
+"pagination": {
+"$ref": "#/components/schemas/Pagination"
+}
+},
+"required": [
+"contents",
+"pagination"
+]
+},
+"PublishContentRequest": {
+"type": "object",
+"properties": {
+"masterId": {
+"type": "string"
+},
+"contentId": {
+"type": "string",
+"description": "\n contentId 포함 - 컨텐츠 수정\n    \n contentId 미포함 - 컨텐츠 생성 및 첫 컨텐츠 임시 저장",
+"nullable": true
+}
+},
+"required": [
+"masterId"
+]
+},
+"PublishContentResponse": {
+"type": "object",
+"properties": {
+"contentId": {
+"type": "string"
+}
+},
+"required": [
+"contentId"
+]
+},
+"ContentCategory": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string"
+},
+"name": {
+"type": "string"
+},
+"isSeleted": {
+"type": "boolean"
+}
+},
+"required": [
+"id",
+"name",
+"isSeleted"
+]
+},
+"OutboundLink": {
+"type": "object",
+"properties": {
+"title": {
+"type": "string"
+},
+"sourceName": {
+"type": "string"
+},
+"originUrl": {
+"type": "string"
+},
+"imageUrl": {
+"type": "string"
+}
+},
+"required": [
+"title",
+"sourceName",
+"originUrl",
+"imageUrl"
+]
+},
+"ContentEditor": {
+"type": "object",
+"properties": {
+"contentCategories": {
+"type": "array",
+"description": "컨텐츠 카테고리 리스트",
+"items": {
+"$ref": "#/components/schemas/ContentCategory"
+}
+},
+"contentTitle": {
+"type": "string"
+},
+"contentState": {
+"type": "string"
+},
+"contentBody": {
+"type": "string",
+"nullable": true
+},
+"outBoundLinks": {
+"type": "array",
+"description": "컨텐츠 아웃바운드 링크 리스트",
+"items": {
+"$ref": "#/components/schemas/OutboundLink"
+}
+}
+},
+"required": [
+"contentCategories",
+"contentTitle",
+"contentState",
+"outBoundLinks"
+]
+},
+"ContentEditorResponse": {
+"type": "object",
+"properties": {
+"contentEditor": {
+"$ref": "#/components/schemas/ContentEditor"
+}
+},
+"required": [
+"contentEditor"
+]
+},
+"OutboundLinkResponse": {
+"type": "object",
+"properties": {
+"outboundLink": {
+"$ref": "#/components/schemas/OutboundLink"
+}
+},
+"required": [
+"outboundLink"
+]
+},
+"UserCommentsResponse": {
+"type": "object",
+"properties": {
+"comments": {
+"type": "array",
+"description": "유저 댓글 리스트",
+"items": {
+"$ref": "#/components/schemas/Comment"
+}
+},
+"pagination": {
+"$ref": "#/components/schemas/Pagination"
+}
+},
+"required": [
+"comments",
+"pagination"
+]
+},
+"UserCommentsDetailResponse": {
+"type": "object",
+"properties": {
+"comments": {
+"type": "array",
+"description": "유저 댓글 상세 리스트",
+"items": {
+"$ref": "#/components/schemas/Comment"
+}
+},
+"pagination": {
+"$ref": "#/components/schemas/Pagination"
+}
+},
+"required": [
+"comments",
+"pagination"
+]
+},
+"COMMENT_TYPE": {
+"type": "string",
+"enum": [
+"all",
+"unread",
+"unliked",
+"uncommented"
+]
+},
+"CHILD_COMMENT_TYPE": {
+"type": "string",
+"enum": [
+"unread",
+"unliked"
+]
+},
+"MyCommentsResponse": {
+"type": "object",
+"properties": {
+"comments": {
+"type": "array",
+"description": "나의 댓글 리스트",
+"items": {
+"$ref": "#/components/schemas/Comment"
+}
+},
+"pagination": {
+"$ref": "#/components/schemas/Pagination"
+}
+},
+"required": [
+"comments",
+"pagination"
+]
+},
+"MyCommentsDetailResponse": {
+"type": "object",
+"properties": {
+"comments": {
+"type": "array",
+"description": "나의 댓글 대댓글 상세 리스트",
+"items": {
+"$ref": "#/components/schemas/Comment"
+}
+},
+"pagination": {
+"$ref": "#/components/schemas/Pagination"
+}
+},
+"required": [
+"comments",
+"pagination"
+]
+},
+"ReadByMasterRequest": {
+"type": "object",
+"properties": {
+"commentId": {
+"type": "string"
+}
+},
+"required": [
+"commentId"
+]
+},
+"MasterReactionResponse": {
+"type": "object",
+"properties": {
+"comment": {
+"$ref": "#/components/schemas/Comment"
+}
+},
+"required": [
+"comment"
+]
+},
+"LikeByMasterRequest": {
+"type": "object",
+"properties": {
+"commentId": {
+"type": "string"
+}
+},
+"required": [
+"commentId"
+]
+},
+"CommentByMasterRequest": {
+"type": "object",
+"properties": {
+"commentId": {
+"type": "string"
+},
+"text": {
+"type": "string",
+"minLength": 1,
+"maxLength": 100,
+"description": "댓글의 내용은 최소 1자 이상, 100자 이하의 문자열이어야 합니다."
+}
+},
+"required": [
+"commentId",
+"text"
+]
+},
+"PickContentMetadata": {
+"type": "object",
+"properties": {
+"contentId": {
+"type": "string",
+"description": "컨텐츠 MongoDB ID"
+},
+"contentCmsId": {
+"type": "string",
+"description": "컨텐츠 Auto Increment ID"
+},
+"contentState": {
+"$ref": "#/components/schemas/CMS_STATE"
+},
+"title": {
+"type": "string"
+},
+"pickCount": {
+"type": "integer"
+},
+"commentCount": {
+"type": "integer"
+},
+"viewCount": {
+"type": "integer"
+},
+"createdAt": {
+"type": "string"
+},
+"reservedAt": {
+"type": "string",
+"nullable": true
+},
+"publishedAt": {
+"type": "string",
+"nullable": true
+}
+},
+"required": [
+"contentId",
+"contentCmsId",
+"contentState",
+"title",
+"pickCount",
+"commentCount",
+"viewCount",
+"createdAt"
+]
+},
+"SeriesContentMetadata": {
+"type": "object",
+"properties": {
+"contentId": {
+"type": "string",
+"description": "컨텐츠 MongoDB ID"
+},
+"contentCmsId": {
+"type": "string",
+"description": "컨텐츠 Auto Increment ID"
+},
+"contentState": {
+"$ref": "#/components/schemas/CMS_STATE"
+},
+"title": {
+"type": "string"
+},
+"totalRound": {
+"type": "integer"
+},
+"createdAt": {
+"type": "string"
+},
+"publishedAt": {
+"type": "string",
+"nullable": true
+}
+},
+"required": [
+"contentId",
+"contentCmsId",
+"contentState",
+"title",
+"totalRound",
+"createdAt"
+]
+},
+"MASTER_NOTICE_STATE": {
+"type": "string",
+"enum": [
+"draft",
+"reserved",
+"published",
+"deleted"
+]
+},
+"MasterNoticeMetadata": {
+"type": "object",
+"properties": {
+"masterNoticeId": {
+"type": "string",
+"description": "마스터의 공지사항 MongoDB ID"
+},
+"masterNoticeCmsId": {
+"type": "string",
+"description": "마스터의 공지사항 Auto Increment ID"
+},
+"masterId": {
+"type": "string",
+"description": "마스터의 MongoDB ID"
+},
+"masterCmsId": {
+"type": "string",
+"description": "마스터의 Auto Increment ID"
+},
+"masterNoticeState": {
+"$ref": "#/components/schemas/MASTER_NOTICE_STATE"
+},
+"title": {
+"type": "string"
+},
+"createdAt": {
+"type": "string"
+},
+"reservedAt": {
+"type": "string",
+"nullable": true
+},
+"publishedAt": {
+"type": "string",
+"nullable": true
+}
+},
+"required": [
+"masterNoticeId",
+"masterNoticeCmsId",
+"masterId",
+"masterCmsId",
+"masterNoticeState",
+"title",
+"createdAt"
+]
+},
+"MasterMetadata": {
+"type": "object",
+"properties": {
+"masterId": {
+"type": "string",
+"description": "마스터 MongoDB ID"
+},
+"masterCmsId": {
+"type": "string",
+"description": "마스터 Auto Increment ID"
+},
+"name": {
+"type": "string",
+"description": "마스터 이름"
+},
+"profileImage": {
+"type": "string",
+"description": "마스터 프로필 이미지"
+}
+},
+"required": [
+"masterId",
+"masterCmsId",
+"name",
+"profileImage"
+]
+},
+"MasterDetailMetadata": {
+"type": "object",
+"properties": {
+"masterId": {
+"type": "string",
+"description": "마스터 MongoDB ID"
+},
+"masterCmsId": {
+"type": "string",
+"description": "마스터 Auto Increment ID"
+},
+"name": {
+"type": "string",
+"description": "마스터 이름"
+},
+"profileImage": {
+"type": "string",
+"description": "마스터 프로필 이미지"
+},
+"description": {
+"type": "string"
+},
+"recommendBackGroundImage": {
+"type": "string",
+"description": "추천페이지 배경이미지"
+},
+"recommendTextImage": {
+"type": "string",
+"description": "추천페이지 텍스트이미지"
+},
+"clubBackGroundImage": {
+"type": "string",
+"description": "클럽페이지 배경이미지"
+},
+"clubTextImage": {
+"type": "string",
+"description": "클럽페이지 텍스트이미지"
+},
+"detailKeyCareer": {
+"type": "string",
+"description": "마스터 대표이력"
+},
+"detailIntroduction": {
+"type": "string",
+"description": "마스터 상세소개"
+},
+"detailCareers": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/DetailCareer"
+},
+"description": "마스터 이력리스트"
+},
+"clubLetter": {
+"type": "string",
+"description": "마스터 편지글"
+},
+"companyFullName": {
+"type": "string",
+"nullable": true,
+"description": "마스터 회사 풀네임"
+},
+"companyShortName": {
+"type": "string",
+"nullable": true,
+"description": "마스터 회사 단축이름"
+},
+"companyIcon": {
+"type": "string",
+"nullable": true,
+"description": "마스터 회사 아이콘"
+}
+},
+"required": [
+"masterId",
+"masterCmsId",
+"name",
+"profileImage",
+"description",
+"recommendBackGroundImage",
+"recommendTextImage",
+"clubBackGroundImage",
+"clubTextImage",
+"detailKeyCareer",
+"detailIntroduction",
+"detailCareers",
+"clubLetter"
+]
+},
+"DetailCareer": {
+"type": "object",
+"properties": {
+"career": {
+"type": "string"
+},
+"round": {
+"type": "integer"
+}
+},
+"required": [
+"career",
+"round"
+]
+},
+"MasterIdentifier": {
+"type": "object",
+"properties": {
+"masterId": {
+"type": "string",
+"description": "컨텐츠 MongoDB ID"
+},
+"masterCmsId": {
+"type": "string",
+"description": "컨텐츠 Auto Increment ID"
+}
+},
+"required": [
+"masterId",
+"masterCmsId"
+]
+},
+"ALARM_TYPE": {
+"type": "string",
+"enum": [
+"CUSTOM",
+"MASTER"
+]
+},
+"PUSH_STATE": {
+"type": "string",
+"enum": [
+"SEND",
+"PENDING",
+"FAIL"
+]
+},
+"PushesData": {
+"type": "object",
+"properties": {
+"pushId": {
+"type": "string",
+"description": "Push MongoDB ID"
+},
+"successCount": {
+"type": "integer"
+},
+"failedCount": {
+"type": "integer"
+},
+"alarmType": {
+"$ref": "#/components/schemas/ALARM_TYPE"
+},
+"title": {
+"type": "string"
+},
+"path": {
+"type": "string"
+},
+"state": {
+"$ref": "#/components/schemas/PUSH_STATE"
+},
+"createdAt": {
+"type": "string",
+"format": "date-time"
+}
+},
+"required": [
+"pushId",
+"successCount",
+"failedCount",
+"alarmType",
+"title",
+"path",
+"state",
+"createdAt"
+]
+},
+"ContentsResponse": {
+"type": "object",
+"properties": {
+"contents": {
+"type": "array",
+"description": "컨텐츠 리스트",
+"items": {
+"discriminator": {
+"propertyName": "contentType",
+"mapping": {
+"pick": "#/components/schemas/PickContentMetadata",
+"secret": "#/components/schemas/SecretContentMetadata",
+"series": "#/components/schemas/SeriesContentMetadata"
+}
+},
+"anyOf": [
+{
+"$ref": "#/components/schemas/PickContentMetadata"
+},
+{
+"$ref": "#/components/schemas/SecretContentMetadata"
+},
+{
+"$ref": "#/components/schemas/SeriesContentMetadata"
+}
+]
+}
+},
+"pagination": {
+"$ref": "#/components/schemas/Pagination"
+}
+},
+"required": [
+"contents",
+"pagination"
+]
+},
+"MASTER_NOTICE_ORDER": {
+"type": "string",
+"enum": [
+"OLDEST",
+"LATEST"
+]
+},
+"MasterNoticesResponse": {
+"type": "object",
+"properties": {
+"masterNotices": {
+"type": "array",
+"description": "마스터의 공지사항 리스트",
+"items": {
+"$ref": "#/components/schemas/MasterNoticeMetadata"
+}
+},
+"pagination": {
+"$ref": "#/components/schemas/Pagination"
+}
+},
+"required": [
+"masterNotices",
+"pagination"
+]
+},
+"MASTER_ORDER": {
+"type": "string",
+"enum": [
+"OLDEST",
+"LATEST"
+]
+},
+"MastersResponse": {
+"type": "object",
+"properties": {
+"masters": {
+"type": "array",
+"description": "마스터 리스트",
+"items": {
+"$ref": "#/components/schemas/MasterMetadata"
+}
+},
+"pagination": {
+"$ref": "#/components/schemas/Pagination"
+}
+},
+"required": [
+"masters",
+"pagination"
+]
+},
+"MasterResponse": {
+"type": "object",
+"properties": {
+"master": {
+"$ref": "#/components/schemas/MasterDetailMetadata"
+}
+},
+"required": [
+"master"
+]
+},
+"MasterUpdateRequest": {
+"type": "object",
+"properties": {
+"name": {
+"type": "string",
+"description": "마스터 이름"
+},
+"description": {
+"type": "string"
+},
+"profileImage": {
+"type": "string",
+"description": "마스터 프로필 이미지"
+},
+"recommendBackGroundImage": {
+"type": "string",
+"description": "추천페이지 배경이미지"
+},
+"recommendTextImage": {
+"type": "string",
+"description": "추천페이지 텍스트이미지"
+},
+"clubBackGroundImage": {
+"type": "string",
+"description": "클럽페이지 배경이미지"
+},
+"clubTextImage": {
+"type": "string",
+"description": "클럽페이지 텍스트이미지"
+},
+"detailKeyCareer": {
+"type": "string",
+"description": "마스터 대표이력"
+},
+"detailIntroduction": {
+"type": "string",
+"description": "마스터 상세소개"
+},
+"detailCareers": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/DetailCareer"
+},
+"description": "마스터 이력리스트"
+},
+"clubLetter": {
+"type": "string",
+"description": "마스터 편지글"
+},
+"companyFullName": {
+"type": "string",
+"nullable": true,
+"description": "마스터 회사 풀네임"
+},
+"companyShortName": {
+"type": "string",
+"nullable": true,
+"description": "마스터 회사 단축이름"
+},
+"companyIcon": {
+"type": "string",
+"nullable": true,
+"description": "마스터 회사 아이콘"
+}
+},
+"required": [
+"name",
+"description",
+"profileImage",
+"recommendBackGroundImage",
+"recommendTextImage",
+"clubBackGroundImage",
+"clubTextImage",
+"detailKeyCareer",
+"detailIntroduction",
+"detailCareers",
+"clubLetter"
+]
+},
+"MasterUpdateResponse": {
+"type": "object",
+"properties": {
+"master": {
+"$ref": "#/components/schemas/MasterIdentifier"
+}
+},
+"required": [
+"master"
+]
+},
+"MasterPushesResponse": {
+"type": "object",
+"properties": {
+"pushes": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/PushesData"
+}
+},
+"pagination": {
+"$ref": "#/components/schemas/Pagination"
+}
+},
+"required": [
+"pushes",
+"pagination"
+]
+},
+"MasterNoticeData": {
+"type": "object",
+"properties": {
+"masterNoticeId": {
+"type": "string",
+"description": "마스터의 공지사항 MongoDB ID"
+},
+"masterNoticeCmsId": {
+"type": "string",
+"description": "마스터의 공지사항 Auto Increment ID"
+},
+"masterId": {
+"type": "string",
+"description": "마스터의 MongoDB ID"
+},
+"masterCmsId": {
+"type": "string",
+"description": "마스터의 Auto Increment ID"
+},
+"masterNoticeState": {
+"$ref": "#/components/schemas/MASTER_NOTICE_STATE"
+},
+"title": {
+"type": "string"
+},
+"body": {
+"type": "string"
+},
+"alarmSetting": {
+"nullable": true,
+"allOf": [
+{
+"$ref": "#/components/schemas/AlarmSetting"
+}
+]
+},
+"createdAt": {
+"type": "string"
+},
+"reservedAt": {
+"type": "string",
+"nullable": true
+},
+"publishedAt": {
+"type": "string",
+"nullable": true
+}
+},
+"required": [
+"masterNoticeId",
+"masterNoticeCmsId",
+"masterId",
+"masterCmsId",
+"masterNoticeState",
+"title",
+"body",
+"createdAt"
+]
+},
+"MasterNoticeResponse": {
+"type": "object",
+"properties": {
+"masterNotice": {
+"$ref": "#/components/schemas/MasterNoticeData"
+}
+},
+"required": [
+"masterNotice"
+]
+},
+"MasterNoticeIdentifier": {
+"type": "object",
+"properties": {
+"masterNoticeId": {
+"type": "string",
+"description": "컨텐츠 MongoDB ID"
+},
+"masterNoticeCmsId": {
+"type": "string",
+"description": "컨텐츠 Auto Increment ID"
+}
+},
+"required": [
+"masterNoticeId",
+"masterNoticeCmsId"
+]
+},
+"MasterNoticeCreateRequest": {
+"type": "object",
+"properties": {
+"masterId": {
+"type": "string",
+"description": "ObjectID"
+},
+"masterNoticeState": {
+"$ref": "#/components/schemas/MASTER_NOTICE_STATE"
+},
+"contentReservedAt": {
+"type": "string",
+"format": "date-time",
+"nullable": true
+},
+"title": {
+"type": "string"
+},
+"body": {
+"type": "string"
+},
+"alarmSetting": {
+"nullable": true,
+"allOf": [
+{
+"$ref": "#/components/schemas/AlarmSetting"
+}
+]
+}
+},
+"required": [
+"masterId",
+"masterNoticeState",
+"title",
+"body"
+]
+},
+"MasterNoticeCreateResponse": {
+"type": "object",
+"properties": {
+"masterNotice": {
+"$ref": "#/components/schemas/MasterNoticeIdentifier"
+}
+},
+"required": [
+"masterNotice"
+]
+},
+"MasterNoticeUpdateRequest": {
+"type": "object",
+"properties": {
+"masterNoticeState": {
+"$ref": "#/components/schemas/MASTER_NOTICE_STATE"
+},
+"contentReservedAt": {
+"type": "string",
+"format": "date-time",
+"nullable": true
+},
+"title": {
+"type": "string"
+},
+"body": {
+"type": "string"
+},
+"alarmSetting": {
+"nullable": true,
+"allOf": [
+{
+"$ref": "#/components/schemas/AlarmSetting"
+}
+]
+}
+},
+"required": [
+"masterNoticeState",
+"title",
+"body"
+]
+},
+"MasterNoticeUpdateResponse": {
+"type": "object",
+"properties": {
+"masterNotice": {
+"$ref": "#/components/schemas/MasterNoticeIdentifier"
+}
+},
+"required": [
+"masterNotice"
+]
+},
+"PushData": {
+"type": "object",
+"properties": {
+"pushId": {
+"type": "string",
+"description": "Push MongoDB ID"
+},
+"successCount": {
+"type": "integer"
+},
+"failedCount": {
+"type": "integer"
+},
+"alarmType": {
+"$ref": "#/components/schemas/ALARM_TYPE"
+},
+"title": {
+"type": "string"
+},
+"path": {
+"type": "string"
+},
+"state": {
+"$ref": "#/components/schemas/PUSH_STATE"
+},
+"createdAt": {
+"type": "string",
+"format": "date-time"
+},
+"alarmTarget": {
+"$ref": "#/components/schemas/ALARM_TARGET"
+}
+},
+"required": [
+"pushId",
+"successCount",
+"failedCount",
+"alarmType",
+"title",
+"path",
+"state",
+"createdAt",
+"alarmTarget"
+]
+},
+"PushIdentifier": {
+"type": "object",
+"properties": {
+"pushId": {
+"type": "string",
+"description": "Push MongoDB ID"
+},
+"customAlarmId": {
+"type": "string",
+"description": "CustomAlarm MongoDB ID"
+}
+},
+"required": [
+"pushId",
+"customAlarmId"
+]
+},
+"PushResponse": {
+"type": "object",
+"properties": {
+"push": {
+"$ref": "#/components/schemas/PushData"
+}
+},
+"required": [
+"push"
+]
+},
+"PUSH_ROUTE_TYPE": {
+"type": "string",
+"enum": [
+"pick",
+"secret"
+]
+},
+"PushCreateRequest": {
+"type": "object",
+"properties": {
+"masterId": {
+"type": "string",
+"description": "Master MongoDB ID"
+},
+"alarmTarget": {
+"$ref": "#/components/schemas/ALARM_TARGET"
+},
+"title": {
+"type": "string"
+},
+"creator": {
+"type": "string",
+"description": "파트너센터 사용자의 CMS ID -> partner.user._id로 대체될 예정"
+},
+"reservedAt": {
+"type": "string",
+"format": "date-time"
+},
+"link": {
+"type": "string"
+},
+"routeId": {
+"type": "string"
+},
+"routeType": {
+"$ref": "#/components/schemas/PUSH_ROUTE_TYPE"
+}
+},
+"required": [
+"masterId",
+"alarmTarget",
+"title",
+"creator",
+"reservedAt",
+"link",
+"routeId",
+"routeType"
+]
+},
+"MembershipWaitlist": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string"
+},
+"isShown": {
+"type": "boolean"
+},
+"communityTabImageUrl": {
+"type": "string"
+},
+"masterTabImageUrl": {
+"type": "string"
+},
+"linkUrl": {
+"type": "string"
+},
+"metadata": {
+"type": "string"
+},
+"createdAt": {
+"type": "string",
+"format": "date-time"
+},
+"updatedAt": {
+"type": "string",
+"format": "date-time"
+}
+},
+"required": [
+"id",
+"isShown",
+"communityTabImageUrl",
+"masterTabImageUrl",
+"linkUrl",
+"metadata",
+"createdAt",
+"updatedAt"
+]
+},
+"MembershipWaitlistsResponse": {
+"type": "object",
+"properties": {
+"membershipWaitlists": {
+"type": "array",
+"description": "곧 멤버쉽이 오픈 되어요 리스트",
+"items": {
+"$ref": "#/components/schemas/MembershipWaitlist"
+}
+},
+"pagination": {
+"nullable": true,
+"allOf": [
+{
+"$ref": "#/components/schemas/Pagination"
+}
+]
+}
+},
+"required": [
+"membershipWaitlists"
+]
+}
+}
+}
+}
